@@ -1,6 +1,6 @@
 // 1. ДАТА ВАШЕГО ЗНАКОМСТВА / НАЧАЛА ОТНОШЕНИЙ
 // Формат: ГГГГ-ММ-ДДTHH:MM:SS
-const startDate = new Date('2024-01-01T04:30:00');
+const startDate = new Date('2025-01-01T04:30:00');
 
 function updateTimer() {
   const now = new Date();
