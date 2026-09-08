@@ -1,0 +1,607 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff9f9;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: #2e282a;
+}
+
+/* HERO */
+.hero {
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(135deg, #ffd1dc 0%, #ffebe7 100%);
+  padding: 20px;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.badge {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  margin-bottom: 15px;
+  color: #d85c74;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  color: #666;
+}
+
+.btn-scroll, .btn-action {
+  background: #d85c74;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(216, 92, 116, 0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.btn-scroll:hover, .btn-action:hover {
+  transform: translateY(-2px);
+  background: #c34c63;
+}
+
+/* СЕКЦИИ */
+.section {
+  padding: 60px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.section h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.section-subtext {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+/* ТАЙМЕР */
+.timer-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.time-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  min-width: 90px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+}
+
+.time-card span {
+  display: block;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #d85c74;
+}
+
+.time-card small {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.timer-subtext {
+  font-style: italic;
+  color: #888;
+}
+
+/* ИНТЕРАКТИВНАЯ КАРТОЧКА */
+.interactive-card {
+  background: #fff;
+  padding: 40px 25px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+#compliment-text {
+  font-size: 1.15rem;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+/* ГАЛЕРЕЯ */
+.gallery-grid {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.polaroid {
+  background: #fff;
+  padding: 12px 12px 20px 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  width: 250px;
+  transition: transform 0.3s;
+}
+
+.polaroid:hover {
+  transform: scale(1.03) rotate(1deg);
+}
+
+.polaroid img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.polaroid .caption {
+  font-family: 'Playfair Display', serif;
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+/* КУПОНЫ */
+.coupons-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.coupon-card {
+  background: #fff;
+  border: 2px dashed #ffd1dc;
+  border-radius: 16px;
+  padding: 25px;
+  width: 260px;
+  text-align: left;
+}
+
+.coupon-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.coupon-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+}
+
+.coupon-card p {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* ФУТЕР */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+  border-top: 1px solid #f0e6e6;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* АНИМАЦИЯ СЕРДЕЧЕК */
+.heart-sparkle {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3) translateY(-40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1) translateY(-90px);
+  }
+}
+
+/* КНОПКА МУЗЫКИ */
+.music-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #ffd1dc;
+  padding: 10px 18px;
+  border-radius: 30px;
+  box-shadow: 0 6px 20px rgba(216, 92, 116, 0.2);
+  cursor: pointer;
+  z-index: 10000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #d85c74;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.music-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(216, 92, 116, 0.3);
+  background: #ffffff;
+}
+
+.music-toggle.playing {
+  background: #d85c74;
+  color: #ffffff;
+  border-color: #d85c74;
+}
+
+/* Пульсация иконки ноты, когда играет трек */
+.music-toggle.playing #music-icon {
+  display: inline-block;
+  animation: pulseNote 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseNote {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* КУПОНЫ: ИНТЕРАКТИВНОСТЬ */
+.coupon-card {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.coupon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(216, 92, 116, 0.15);
+  border-color: #d85c74;
+}
+
+.coupon-status {
+  margin-top: 15px;
+  font-size: 0.8rem;
+  color: #d85c74;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.coupon-card.activated {
+  border-color: #4CAF50;
+  background: #f4fbf5;
+}
+
+.coupon-card.activated .coupon-status {
+  color: #2e7d32;
+}
+
+/* КВИЗ */
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.quiz-card {
+  background: #fff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  text-align: left;
+}
+
+.quiz-question {
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-btn {
+  background: #fff9fa;
+  border: 1px solid #ffd1dc;
+  color: #444;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.quiz-btn:hover {
+  background: #ffe6ec;
+  border-color: #d85c74;
+}
+
+.quiz-feedback {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  min-height: 20px;
+  transition: opacity 0.3s;
+}
+
+.quiz-feedback.success {
+  color: #2e7d32;
+}
+
+.quiz-feedback.error {
+  color: #d85c74;
+}
+
+/* ФИНАЛЬНЫЙ БЛОК */
+.finale-section {
+  padding: 40px 20px 80px 20px;
+}
+
+.finale-box {
+  background: linear-gradient(135deg, #fff0f3 0%, #fff 100%);
+  border: 2px solid #ffd1dc;
+  border-radius: 24px;
+  padding: 45px 25px;
+  max-width: 650px;
+  margin: 0 auto;
+  box-shadow: 0 10px 30px rgba(216, 92, 116, 0.1);
+}
+
+.finale-box p {
+  margin: 15px 0 25px 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.btn-finale {
+  background: #d85c74;
+  color: #fff;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(216, 92, 116, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-finale:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(216, 92, 116, 0.45);
+}
+
+/* КНОПКА СМЕНЫ ТЕМЫ */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #ffd1dc;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s, background 0.3s, color 0.3s;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* ГЕНЕРАТОР ПЛАНОВ */
+.date-card {
+  text-align: center;
+}
+
+.date-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#date-text {
+  font-size: 1.15rem;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* ЛАЙТБОКС (УВЕЛИЧЕНИЕ ФОТО) */
+.polaroid {
+  cursor: pointer;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 20000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 12, 15, 0.92);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.lightbox.active {
+  display: flex;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 75vh;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  object-fit: contain;
+}
+
+.lightbox p {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  margin-top: 15px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.2s;
+}
+
+.lightbox-close:hover {
+  opacity: 0.7;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================================
+   ТЕМНАЯ РОМАНТИЧЕСКАЯ ТЕМА (NIGHT MODE)
+========================================= */
+body.dark-mode {
+  background-color: #121013;
+  color: #e3d5d8;
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+  color: #ffdce3;
+}
+
+body.dark-mode .hero {
+  background: linear-gradient(135deg, #2c1a24 0%, #171216 100%);
+}
+
+body.dark-mode .badge {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ff9bb0;
+  border: 1px solid rgba(255, 155, 176, 0.2);
+}
+
+body.dark-mode .subtitle,
+body.dark-mode .section-subtext,
+body.dark-mode .timer-subtext,
+body.dark-mode .time-card small,
+body.dark-mode .coupon-card p,
+body.dark-mode .quiz-card p {
+  color: #baa4a9;
+}
+
+body.dark-mode .time-card,
+body.dark-mode .interactive-card,
+body.dark-mode .polaroid,
+body.dark-mode .coupon-card,
+body.dark-mode .quiz-card,
+body.dark-mode footer {
+  background: #1c161a;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  border-color: #3d2833;
+}
+
+body.dark-mode .time-card span {
+  color: #ff7895;
+}
+
+body.dark-mode .coupon-card {
+  border: 2px dashed #4a2d3b;
+}
+
+body.dark-mode .quiz-btn {
+  background: #251d23;
+  border-color: #4a2d3b;
+  color: #e3d5d8;
+}
+
+body.dark-mode .quiz-btn:hover {
+  background: #382430;
+  border-color: #ff7895;
+}
+
+body.dark-mode .finale-box {
+  background: linear-gradient(135deg, #241920 0%, #1a1317 100%);
+  border-color: #4a2d3b;
+}
+
+body.dark-mode .music-toggle,
+body.dark-mode .theme-toggle {
+  background: rgba(30, 22, 27, 0.9);
+  border-color: #4a2d3b;
+  color: #ff9bb0;
+}

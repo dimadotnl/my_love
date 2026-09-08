@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Для моей любимой ❤️</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Шрифт для красивого заголовка -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Библиотека конфетти -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- КНОПКА ПЕРЕКЛЮЧЕНИЯ ТЕМЫ (ДЕНЬ / НОЧЬ) -->
+  <button id="theme-toggle" class="theme-toggle" onclick="toggleTheme()" aria-label="Сменить тему">
+    <span id="theme-icon">🌙</span>
+  </button>
+
+  <!-- ГЛАВНЫЙ ЭКРАН -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="badge">Только для тебя ✨</span>
+      <h1>Наш маленький уголок</h1>
+      <p class="subtitle">Собрал здесь самые теплые моменты, воспоминания и кое-что еще...</p>
+      <button class="btn-scroll" onclick="scrollToSection('timer-section')">Открыть сюрприз ↓</button>
+    </div>
+  </header>
+
+  <!-- СЧЕТЧИК ВРЕМЕНИ ВМЕСТЕ -->
+  <section id="timer-section" class="section timer-section">
+    <h2>Мы вместе уже:</h2>
+    <div class="timer-container" id="timer">
+      <div class="time-card"><span id="days">0</span><small>дней</small></div>
+      <div class="time-card"><span id="hours">0</span><small>часов</small></div>
+      <div class="time-card"><span id="minutes">0</span><small>минут</small></div>
+      <div class="time-card"><span id="seconds">0</span><small>секунд</small></div>
+    </div>
+    <p class="timer-subtext">...и каждая секунда рядом с тобой — лучшая.</p>
+  </section>
+
+  <!-- ГЕНЕРАТОР КОМПЛИМЕНТОВ -->
+  <section class="section reasons-section">
+    <h2>Когда захочется улыбнуться</h2>
+    <div class="card interactive-card">
+      <p id="compliment-text">Нажми на кнопку ниже, чтобы узнать одну из причин, почему ты особенная ✨</p>
+      <button class="btn-action" onclick="generateCompliment()">Узнать причину</button>
+    </div>
+  </section>
+
+  <!-- ФОТОГАЛЕРЕЯ / ПОЛАРОИДЫ (С ЛАЙТБОКСОМ) -->
+  <section class="section gallery-section">
+    <h2>Любимые моменты</h2>
+    <div class="gallery-grid">
+      <div class="polaroid" onclick="openLightbox(this)">
+        <img src="photo3.jpg" alt="Фото 3">
+        <p class="caption">Твоя улыбка ❤️</p>
+      </div>
+      <div class="polaroid" onclick="openLightbox(this)">
+        <img src="photo6.jpg" alt="Фото 6" onerror="this.src='https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?w=600&auto=format&fit=crop&q=80'">
+        <p class="caption">Тот самый лучший день</p>
+      </div>
+      <div class="polaroid" onclick="openLightbox(this)">
+        <img src="photo5.jpg" alt="Фото 5">
+        <p class="caption">Рядом с тобой тепло</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- КУПОНЫ ЖЕЛАНИЙ С АКТИВАЦИЕЙ -->
+  <section class="section coupons-section">
+    <h2>Твои персональные купоны</h2>
+    <p class="section-subtext">Нажми на купон, чтобы активировать его!</p>
+    <div class="coupons-grid">
+      <div class="coupon-card" onclick="activateCoupon(this, 'Расслабляющий массаж')">
+        <div class="coupon-icon">💆‍♀️</div>
+        <h3>Расслабляющий массаж</h3>
+        <p>После тяжелого дня в любое время.</p>
+        <div class="coupon-status">Нажми для активации</div>
+      </div>
+      <div class="coupon-card" onclick="activateCoupon(this, 'Любимый ужин')">
+        <div class="coupon-icon">🍰</div>
+        <h3>Любимый ужин</h3>
+        <p>Приготовлю сам или закажем всё, что захочешь.</p>
+        <div class="coupon-status">Нажми для активации</div>
+      </div>
+      <div class="coupon-card" onclick="activateCoupon(this, 'Вечер кино и объятий')">
+        <div class="coupon-icon">🎬</div>
+        <h3>Вечер кино и объятий</h3>
+        <p>Фильм выбираешь ты, вкусняшки с меня.</p>
+        <div class="coupon-status">Нажми для активации</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ГЕНЕРАТОР ПЛАНОВ НА ВЕЧЕР / СВИДАНИЙ (Пункт 3) -->
+  <section class="section date-ideas-section">
+    <h2>Чем займемся сегодня?</h2>
+    <p class="section-subtext">Если сложно решить — положитесь на судьбу ✨</p>
+    <div class="card interactive-card date-card">
+      <div class="date-icon" id="date-icon">🎲</div>
+      <p id="date-text">Нажми на кнопку, чтобы выбрать случайный план для нас!</p>
+      <button class="btn-action" onclick="generateDateIdea()">Сгенерировать идею</button>
+    </div>
+  </section>
+
+  <!-- МИНИ-КВИЗ ПРО НАС -->
+  <section class="section quiz-section">
+    <h2>Мини-викторина про нас ❤️</h2>
+    <p class="section-subtext">Отвечай честно — правильные ответы здесь знаю только я :)</p>
+    
+    <div class="quiz-container">
+      <!-- Вопрос 1 -->
+      <div class="quiz-card" id="q1">
+        <p class="quiz-question">1. Кто из нас чаще говорит: «Я не голодна», а потом съедает половину моей порции?</p>
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Это факт! Но мне для тебя ничего не жалко, даже самой вкусной картошки 🍟❤️')">Ну... еда из твоей тарелки объективно вкуснее 🙈</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Один разочек было, да? И так каждый раз 😂❤️')">Это наглая клевета, такого не бывает!</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Я просто помогаю тебе не переесть, цени заботу! 😉')">Я просто забочусь о твоем аппетите!</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Вопрос 2 -->
+      <div class="quiz-card" id="q2">
+        <p class="quiz-question">2. Что происходит, когда мы заходим в магазин?</p>
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'О да! Стоим, смотрим, спорим и в итоге берем то же, что и всегда 😂')">Половину времени стоим у витрины и не можем выбрать</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'В яблочко! Зато как же это вкусно под фильм или сериал 🍟🍕')">Покупаем всё самое вредное</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Это чистая правда! С тобой даже обычный поход за продуктами превращается в классное свидание ❤️')">Ходим по магазину и общаемся обо всем на свете</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Вопрос 3 -->
+      <div class="quiz-card" id="q3">
+        <p class="quiz-question">3. Кто из нас мерзнет при любой погоде и греет свои холодные ручки и ножки об другого?</p>
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Именно! Моя главная жизненная миссия — работать твоим персональным обогревателем 🫂❄️')">Я! У меня всегда ледяные лапки, а ты мой обогреватель ❄️</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, false, 'Не придумывай, мои ладошки всегда теплее твоих!')">Ты все преувеличиваешь, мне всегда тепло!</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Вопрос 4 -->
+      <div class="quiz-card" id="q4">
+        <p class="quiz-question">4. Насколько сильно я тебя люблю?</p>
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkAnswer(this, false, 'Бесконечность — это даже слишком мало для моих чувств!')">До Луны и обратно</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Абсолютно точно! Словами и цифрами это просто не передать ❤️✨')">Больше, чем вообще можно выразить любыми словами ❤️</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+
+      <!-- Вопрос 5 -->
+      <div class="quiz-card" id="q5">
+        <p class="quiz-question">5. Кто в наших отношениях самая красивая, очаровательная и любимая?</p>
+        <div class="quiz-options">
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Бинго! Ты — самое главное и прекрасное чудо в моей жизни! 🎉❤️', true)">Конечно же я! 👸✨</button>
+          <button class="quiz-btn" onclick="checkAnswer(this, true, 'Даже не сомневайся — это на все 1000% ты! 🎉❤️', true)">Та самая девочка, которая сейчас читает этот текст ❤️</button>
+        </div>
+        <div class="quiz-feedback"></div>
+      </div>
+    </div>
+  </section>
+
+ <!-- СЕКЦИЯ С БОЛЬШИМ САЛЮТОМ -->
+  <section class="section finale-section">
+    <div class="finale-box">
+      <h2>Я люблю тебя, моя жизнь ❤️</h2>
+      <p>Спасибо за каждый день, твою улыбку и тепло, которые ты мне даришь.</p>
+      <button class="btn-finale" onclick="launchGrandConfetti()">Нажми сюда ✨</button>
+    </div>
+  </section>
+
+  <!-- ФУТЕР -->
+  <footer>
+    <p>Сделано специально для тебя с любовью ❤️</p>
+  </footer>
+
+  <!-- МОДАЛЬНОЕ ОКНО ДЛЯ ФОТО (ЛАЙТБОКС) -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Увеличенное фото">
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <!-- МУЗЫКАЛЬНЫЙ ПЛЕЕР -->
+  <audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+
+  <button id="music-btn" class="music-toggle" onclick="toggleMusic()" aria-label="Включить музыку">
+    <span id="music-icon">🎵</span>
+    <span id="music-text">Включить музыку</span>
+  </button>
+
+  <script src="script.js"></script>
+</body>
+</html>
