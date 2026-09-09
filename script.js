@@ -61,8 +61,8 @@ function scrollToSection(id) {
 
 // 4. ВЫЛЕТАЮЩИЕ СЕРДЕЧКИ ПРИ КЛИКЕ
 document.addEventListener('click', (e) => {
-  // Игнорируем клики по кнопкам, чтобы не мешать основному действию
-  if (e.target.tagName.toLowerCase() === 'button') return;
+  // Игнорируем клики по кнопкам и интерактивным элементам
+  if (e.target.closest('button') || e.target.closest('.polaroid') || e.target.closest('.coupon-card')) return;
 
   const heart = document.createElement('div');
   heart.className = 'heart-sparkle';
@@ -103,7 +103,7 @@ function toggleMusic() {
   }
 }
 
-// 6. АКТИВАЦИЯ КУПОНОВ (Пункт 2)
+// 6. АКТИВАЦИЯ КУПОНОВ
 const TELEGRAM_USERNAME = 'dimadotnl'; 
 
 function activateCoupon(card, title) {
@@ -113,14 +113,12 @@ function activateCoupon(card, title) {
   const statusElem = card.querySelector('.coupon-status');
   statusElem.innerText = '✓ Активирован!';
 
-  // Небольшой салют конфетти прямо над карточкой
   confetti({
     particleCount: 50,
     spread: 60,
     origin: { y: 0.7 }
   });
 
-  // Открываем Telegram с готовым сообщением
   setTimeout(() => {
     const text = encodeURIComponent(`Привет! Я активировала купон: "${title}" ❤️`);
     if (TELEGRAM_USERNAME) {
@@ -129,7 +127,7 @@ function activateCoupon(card, title) {
   }, 600);
 }
 
-// 7. МИНИ-КВИЗ (Пункт 3)
+// 7. МИНИ-КВИЗ
 function checkAnswer(button, isCorrect, message, isLast = false) {
   const parent = button.closest('.quiz-card');
   const feedback = parent.querySelector('.quiz-feedback');
@@ -152,7 +150,7 @@ function checkAnswer(button, isCorrect, message, isLast = false) {
   }
 }
 
-// 8. ГРАНДИОЗНЫЙ САЛЮТ КОНФЕТТИ (Пункт 5)
+// 8. ГРАНДИОЗНЫЙ САЛЮТ КОНФЕТТИ
 function launchGrandConfetti() {
   const duration = 3 * 1000;
   const animationEnd = Date.now() + duration;
@@ -170,7 +168,6 @@ function launchGrandConfetti() {
     }
 
     const particleCount = 50 * (timeLeft / duration);
-    // Салюты слева и справа
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
     confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
   }, 250);
@@ -247,12 +244,59 @@ function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
 }
 
-// 12. ПРОКРУТКА КАРУСЕЛИ ФОТОГРАФИЙ
+// 12. СЛАЙДЕР ФОТОГРАФИЙ (КНОПКИ + ПЕРЕТАСКИВАНИЕ МЫШЬЮ)
 function scrollGallery(direction) {
   const track = document.getElementById('gallery-track');
-  const scrollAmount = 280; // ширина карточки + отступ
+  if (!track) return;
+  const card = track.querySelector('.polaroid');
+  if (!card) return;
+  
+  const scrollAmount = card.offsetWidth + 25;
   track.scrollBy({
     left: direction * scrollAmount,
     behavior: 'smooth'
   });
+}
+
+// Логика Drag-to-scroll
+const track = document.getElementById('gallery-track');
+let isDown = false;
+let startX;
+let scrollLeft;
+let isDragging = false;
+
+if (track) {
+  track.addEventListener('mousedown', (e) => {
+    isDown = true;
+    isDragging = false;
+    track.classList.add('grabbing');
+    startX = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+  });
+
+  track.addEventListener('mouseleave', () => {
+    isDown = false;
+    track.classList.remove('grabbing');
+  });
+
+  track.addEventListener('mouseup', () => {
+    isDown = false;
+    track.classList.remove('grabbing');
+  });
+
+  track.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    if (Math.abs(walk) > 6) {
+      isDragging = true;
+    }
+    track.scrollLeft = scrollLeft - walk;
+  });
+}
+
+function handlePolaroidClick(element) {
+  if (isDragging) return;
+  openLightbox(element);
 }
