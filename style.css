@@ -140,92 +140,120 @@ h1, h2, h3 {
   margin-bottom: 25px;
 }
 
-/* КАРУСЕЛЬ ФОТОГРАФИЙ */
+/* ГАЛЕРЕЯ / СЛАЙДЕР ПОЛАРОИДОВ */
 .gallery-wrapper {
   position: relative;
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
-  padding: 0 10px;
+  padding: 0 45px;
+  box-sizing: border-box;
 }
 
 .gallery-track {
   display: flex;
-  gap: 20px;
+  gap: 25px;
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  padding: 20px 10px 30px 10px;
+  padding: 20px 5px 35px 5px;
+  cursor: grab;
+  user-select: none;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Скрываем стандартную полосу прокрутки для аккуратного вида */
 .gallery-track::-webkit-scrollbar {
-  height: 8px;
+  display: none;
 }
-.gallery-track::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.04);
-  border-radius: 10px;
-}
-.gallery-track::-webkit-scrollbar-thumb {
-  background: #ffd1dc;
-  border-radius: 10px;
+
+.gallery-track.grabbing {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
 }
 
 .gallery-track .polaroid {
-  flex: 0 0 260px;
-  scroll-snap-align: center;
-  user-select: none;
+  flex: 0 0 calc((100% - 50px) / 3);
+  scroll-snap-align: start;
+  box-sizing: border-box;
 }
 
-/* Кнопки прокрутки влево/вправо */
+.polaroid {
+  background: #fff;
+  padding: 12px 12px 20px 12px;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.polaroid:hover {
+  transform: scale(1.03) rotate(1deg);
+}
+
+.polaroid img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.polaroid .caption {
+  font-family: 'Playfair Display', serif;
+  margin-top: 15px;
+  font-size: 1rem;
+}
+
+/* СТРЕЛКИ НАВИГАЦИИ ГАЛЕРЕИ */
 .gallery-nav-btn {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 10px);
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: #ffffff;
   border: 1px solid #ffd1dc;
   color: #d85c74;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  font-size: 2rem;
+  font-size: 2.2rem;
   line-height: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, background 0.2s;
+  box-shadow: 0 4px 15px rgba(216, 92, 116, 0.18);
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .gallery-nav-btn:hover {
-  background: #fff;
   transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(216, 92, 116, 0.28);
 }
 
-.prev-btn { left: -15px; }
-.next-btn { right: -15px; }
+.prev-btn { left: -5px; }
+.next-btn { right: -5px; }
 
-/* Адаптив для телефонов */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .gallery-track .polaroid {
+    flex: 0 0 calc((100% - 25px) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-wrapper {
+    padding: 0 15px;
+  }
   .gallery-nav-btn {
-    display: none; /* На телефонах удобнее просто листать пальцем */
+    display: none;
   }
   .gallery-track .polaroid {
-    flex: 0 0 240px;
+    flex: 0 0 85%;
+    scroll-snap-align: center;
   }
 }
 
-/* Поддержка ночной темы */
-body.dark-mode .gallery-nav-btn {
-  background: rgba(28, 22, 26, 0.9);
-  border-color: #4a2d3b;
-  color: #ff9bb0;
-}
-body.dark-mode .gallery-track::-webkit-scrollbar-thumb {
-  background: #4a2d3b;
-}
 /* КУПОНЫ */
 .coupons-grid {
   display: flex;
@@ -241,6 +269,16 @@ body.dark-mode .gallery-track::-webkit-scrollbar-thumb {
   padding: 25px;
   width: 260px;
   text-align: left;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.coupon-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(216, 92, 116, 0.15);
+  border-color: #d85c74;
 }
 
 .coupon-icon {
@@ -256,100 +294,6 @@ body.dark-mode .gallery-track::-webkit-scrollbar-thumb {
 .coupon-card p {
   font-size: 0.9rem;
   color: #666;
-}
-
-/* ФУТЕР */
-footer {
-  text-align: center;
-  padding: 40px 20px;
-  background: #fff;
-  border-top: 1px solid #f0e6e6;
-  color: #999;
-  font-size: 0.9rem;
-}
-
-/* АНИМАЦИЯ СЕРДЕЧЕК */
-.heart-sparkle {
-  position: fixed;
-  font-size: 20px;
-  pointer-events: none;
-  user-select: none;
-  z-index: 9999;
-  animation: floatUp 1.2s ease-out forwards;
-}
-
-@keyframes floatUp {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(0.6) translateY(0);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.3) translateY(-40px);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(1) translateY(-90px);
-  }
-}
-
-/* КНОПКА МУЗЫКИ */
-.music-toggle {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid #ffd1dc;
-  padding: 10px 18px;
-  border-radius: 30px;
-  box-shadow: 0 6px 20px rgba(216, 92, 116, 0.2);
-  cursor: pointer;
-  z-index: 10000;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  color: #d85c74;
-  font-weight: 600;
-  backdrop-filter: blur(8px);
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
-}
-
-.music-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(216, 92, 116, 0.3);
-  background: #ffffff;
-}
-
-.music-toggle.playing {
-  background: #d85c74;
-  color: #ffffff;
-  border-color: #d85c74;
-}
-
-/* Пульсация иконки ноты, когда играет трек */
-.music-toggle.playing #music-icon {
-  display: inline-block;
-  animation: pulseNote 1.2s infinite ease-in-out;
-}
-
-@keyframes pulseNote {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.25); }
-}
-
-/* КУПОНЫ: ИНТЕРАКТИВНОСТЬ */
-.coupon-card {
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
-}
-
-.coupon-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(216, 92, 116, 0.15);
-  border-color: #d85c74;
 }
 
 .coupon-status {
@@ -434,6 +378,27 @@ footer {
   color: #d85c74;
 }
 
+/* ГЕНЕРАТОР ПЛАНОВ */
+.date-card {
+  text-align: center;
+}
+
+.date-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#date-text {
+  font-size: 1.15rem;
+  min-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
 /* ФИНАЛЬНЫЙ БЛОК */
 .finale-section {
   padding: 40px 20px 80px 20px;
@@ -473,6 +438,85 @@ footer {
   box-shadow: 0 8px 25px rgba(216, 92, 116, 0.45);
 }
 
+/* ФУТЕР */
+footer {
+  text-align: center;
+  padding: 40px 20px;
+  background: #fff;
+  border-top: 1px solid #f0e6e6;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* АНИМАЦИЯ СЕРДЕЧЕК */
+.heart-sparkle {
+  position: fixed;
+  font-size: 20px;
+  pointer-events: none;
+  user-select: none;
+  z-index: 9999;
+  animation: floatUp 1.2s ease-out forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.6) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.3) translateY(-40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1) translateY(-90px);
+  }
+}
+
+/* КНОПКА МУЗЫКИ */
+.music-toggle {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #ffd1dc;
+  padding: 10px 18px;
+  border-radius: 30px;
+  box-shadow: 0 6px 20px rgba(216, 92, 116, 0.2);
+  cursor: pointer;
+  z-index: 10000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #d85c74;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.music-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(216, 92, 116, 0.3);
+  background: #ffffff;
+}
+
+.music-toggle.playing {
+  background: #d85c74;
+  color: #ffffff;
+  border-color: #d85c74;
+}
+
+.music-toggle.playing #music-icon {
+  display: inline-block;
+  animation: pulseNote 1.2s infinite ease-in-out;
+}
+
+@keyframes pulseNote {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
 /* КНОПКА СМЕНЫ ТЕМЫ */
 .theme-toggle {
   position: fixed;
@@ -498,32 +542,7 @@ footer {
   transform: scale(1.1);
 }
 
-/* ГЕНЕРАТОР ПЛАНОВ */
-.date-card {
-  text-align: center;
-}
-
-.date-icon {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-#date-text {
-  font-size: 1.15rem;
-  min-height: 55px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-/* ЛАЙТБОКС (УВЕЛИЧЕНИЕ ФОТО) */
-.polaroid {
-  cursor: pointer;
-}
-
+/* ЛАЙТБОКС */
 .lightbox {
   display: none;
   position: fixed;
@@ -632,6 +651,12 @@ body.dark-mode .time-card span {
 
 body.dark-mode .coupon-card {
   border: 2px dashed #4a2d3b;
+}
+
+body.dark-mode .gallery-nav-btn {
+  background: #1c161a;
+  border-color: #4a2d3b;
+  color: #ff9bb0;
 }
 
 body.dark-mode .quiz-btn {
