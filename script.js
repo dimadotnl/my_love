@@ -246,3 +246,13 @@ function openLightbox(polaroidElement) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
 }
+
+// 12. ПРОКРУТКА КАРУСЕЛИ ФОТОГРАФИЙ
+function scrollGallery(direction) {
+  const track = document.getElementById('gallery-track');
+  const scrollAmount = 280; // ширина карточки + отступ
+  track.scrollBy({
+    left: direction * scrollAmount,
+    behavior: 'smooth'
+  });
+}
