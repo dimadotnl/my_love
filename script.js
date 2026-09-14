@@ -62,7 +62,7 @@ function scrollToSection(id) {
 // 4. ВЫЛЕТАЮЩИЕ СЕРДЕЧКИ ПРИ КЛИКЕ
 document.addEventListener('click', (e) => {
   // Игнорируем клики по кнопкам и интерактивным элементам
-  if (e.target.closest('button') || e.target.closest('.polaroid') || e.target.closest('.coupon-card')) return;
+  if (e.target.closest('button') || e.target.closest('.polaroid') || e.target.closest('.coupon-card') || e.target.closest('.return-secret-card') || e.target.closest('.letter-paper-wrapper')) return;
 
   const heart = document.createElement('div');
   heart.className = 'heart-sparkle';
@@ -299,4 +299,80 @@ if (track) {
 function handlePolaroidClick(element) {
   if (isDragging) return;
   openLightbox(element);
+}
+
+// ==========================================
+// СЕКРЕТНОЕ ПИСЬМО ДЛЯ НАСТИ
+// ==========================================
+function openSecretLetter() {
+  const modal = document.getElementById('letterModal');
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Салют конфетти при раскрытии письма
+    if (typeof confetti === 'function') {
+      confetti({
+        particleCount: 30,
+        spread: 50,
+        origin: { y: 0.6 }
+      });
+    }
+  }
+}
+
+function closeSecretLetter() {
+  const letterModal = document.getElementById('letterModal');
+  if (letterModal) {
+    letterModal.classList.remove('active');
+  }
+
+  // Показываем целующего котика со звуком
+  showKissingCat();
+}
+
+function showKissingCat() {
+  const kissOverlay = document.getElementById('kissCatOverlay');
+  const video = document.getElementById('kissCatVideo');
+  const kissAudio = document.getElementById('kissAudio');
+  
+  if (!kissOverlay) return;
+
+  kissOverlay.classList.add('active');
+
+  // Воспроизведение отдельного звука kiss.mp3 (если добавлен)
+  if (kissAudio) {
+    kissAudio.currentTime = 0;
+    kissAudio.play().catch(e => console.log('Audio playback info:', e));
+  }
+
+  // Воспроизведение видео со звуком
+  if (video) {
+    video.muted = false;
+    video.volume = 1.0;
+    video.currentTime = 0;
+    video.play().catch(e => console.log('Video playback info:', e));
+  }
+
+  // Сердечки конфетти
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 35,
+      spread: 60,
+      origin: { y: 0.5 }
+    });
+  }
+
+  // Через 2.6 сек мягко прячем котика и возвращаем скролл
+  setTimeout(() => {
+    kissOverlay.classList.remove('active');
+    if (video) video.pause();
+    document.body.style.overflow = '';
+  }, 2600);
+}
+
+function handleLetterOverlayClick(e) {
+  if (e.target.id === 'letterModal') {
+    closeSecretLetter();
+  }
 }
