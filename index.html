@@ -41,6 +41,17 @@
     <p class="timer-subtext">...и каждая секунда рядом с тобой — лучшая.</p>
   </section>
 
+<!-- ПАСХАЛКА: СЕКРЕТНОЕ ПОСЛАНИЕ -->
+<div class="return-secret-card" onclick="openSecretLetter()">
+  <div class="secret-icon-wrap">
+    <span class="flying-envelope">💌</span>
+  </div>
+  <div class="secret-text-wrap">
+    <span class="secret-label">Секретное послание</span>
+    <p class="secret-title">Если ты вернулась сюда снова... Нажми ✨</p>
+  </div>
+</div>
+
   <!-- ГЕНЕРАТОР КОМПЛИМЕНТОВ -->
   <section class="section reasons-section">
     <h2>Когда захочется улыбнуться</h2>
@@ -221,5 +232,49 @@
   </button>
 
   <script src="script.js"></script>
+
+<!-- МОДАЛЬНОЕ ОКНО: ПИСЬМО ДЛЯ НАСТИ -->
+<div class="letter-modal-overlay" id="letterModal" onclick="handleLetterOverlayClick(event)">
+  <div class="letter-paper-wrapper">
+    <button class="btn-close-letter" onclick="closeSecretLetter()" title="Закрыть">✕</button>
+    
+    <div class="wax-seal">❤️</div>
+
+    <div class="letter-content">
+      <h3 class="letter-salutation">Ну что, любовь моя...</h3>
+      
+      <div class="letter-body">
+        <p>
+          Если ты зашла сюда еще раз, значит тебе не все равно на то, что я для тебя делаю. И ты даже не представляешь, как мне приятно это знать.
+        </p>
+        <p>
+          Я хотел создать для тебя маленький уголок, куда ты сможешь прийти в любой момент: когда на душе тепло, когда выдался тяжёлый день или когда просто захочется вспомнить наши самые классные моменты.
+        </p>
+        <p>
+          Просто знай, что ты самый лучший человечек на этом свете. Я всегда буду рядом и всегда буду за тебя.
+        </p>
+        <p>
+          Спасибо тебе за твою искренность, нежность, смех и за то, какая ты настоящая рядом со мной. Я безумно ценю всё, что между нами есть, и очень тебя люблю.
+        </p>
+      </div>
+
+      <div class="letter-footer">
+        <span class="letter-signature">Навсегда твой, Димарик ❤️</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ПОП-АП С ЦЕЛУЮЩИМ КОТИКОМ ПРИ ЗАКРЫТИИ -->
+<div class="kiss-cat-overlay" id="kissCatOverlay">
+  <div class="kiss-cat-box">
+    <video id="kissCatVideo" playsinline>
+      <source src="cat-kiss.mp4" type="video/mp4">
+    </video>
+
+    <p class="kiss-text">Чмок! ❤️</p>
+  </div>
+</div>
+
 </body>
 </html>
